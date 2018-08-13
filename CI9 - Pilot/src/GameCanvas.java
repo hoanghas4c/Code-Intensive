@@ -11,6 +11,7 @@ public class GameCanvas extends JPanel {
 
     Image background;
     Image player;
+    Graphics backBufferGraphics;
 
     int x = 300 - 32;
     int y = 600;
@@ -32,14 +33,12 @@ public class GameCanvas extends JPanel {
         }
 
         backBuffer = new BufferedImage(600, 800, BufferedImage.TYPE_INT_ARGB);
+        backBufferGraphics = backBuffer.getGraphics();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawImage(background, 0, 0, null);
-        g.drawImage(player, x, y, null);
-        // x = cx - w/2;
-        // y = cy - h/2;
+       g.drawImage(backBuffer, 0 , 0 , null);
     }
 
     // Thay vì nhận phím r repaint ngta repaint liên tục
@@ -91,6 +90,9 @@ public class GameCanvas extends JPanel {
 
     // Ham ve lai
     void render(){
+        backBufferGraphics.drawImage(background, 0, 0, null);
+        backBufferGraphics.drawImage(player, x, y, null);
+
         this.repaint();
     }
 }
