@@ -36,6 +36,7 @@ public class GameCanvas extends JPanel {
     boolean downPressed = false;
 
     // Thay vì nhận phím r repaint ngta repaint liên tục
+    // Dùng phương pháp gán boolen cho mỗi khi ấn phím để chạy gameLoop
     void KeyPressed(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             rightPressed = true;
