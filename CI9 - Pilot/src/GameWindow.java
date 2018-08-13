@@ -1,54 +1,39 @@
 import javax.swing.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
+import java.sql.SQLOutput;
 
 public class GameWindow extends JFrame
 {
     GameCanvas gameCanvas;
 
-
     public GameWindow()
     {
         // Set up window
-        this.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-                System.out.println("windowOpened");
-            }
-
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
+        });
+
+        // Nhận phím ấn vào
+        this.addKeyListener(new KeyAdapter() {
 
             @Override
-            public void windowClosed(WindowEvent e) {
-
+            public void keyPressed(KeyEvent e) {
+                gameCanvas.KeyPressed(e);
             }
 
             @Override
-            public void windowIconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-
+            public void keyReleased(KeyEvent e) {
+                gameCanvas.KeyReleased(e);
             }
         });
-        this.setSize(600, 800);
-        this.setResizable(false);
-        this.setTitle("Micro - War");
+
+
+        this.setSize(600, 800);// Vẽ khung hình
+        this.setResizable(false);// Khóa phóng to thu nhỏ
+        this.setTitle("Micro - War"); // Hiện tên ở window
 
         // Set up canvas
         gameCanvas = new GameCanvas();
@@ -56,5 +41,17 @@ public class GameWindow extends JFrame
 
 
         this.setVisible(true);
+    }
+
+    long lastTimeRender = 0;
+    void mainLoop(){
+        while(true){
+            long currentTime = System.nanoTime();
+            if( currentTime - lastTimeRender >= 17_000_000){
+                gameCanvas.render();
+                lastTimeRender = currentTime;
+            }
+
+        }
     }
 }
