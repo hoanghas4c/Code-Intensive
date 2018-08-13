@@ -2,13 +2,25 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 // Ve Game
 
 public class GameCanvas extends JPanel {
+
     Image background;
     Image player;
+
+    int x = 300 - 32;
+    int y = 600;
+    boolean rightPressed = false;
+    boolean leftPressed = false;
+    boolean upPressed = false;
+    boolean downPressed = false;
+
+    BufferedImage backBuffer;
+
 
     public GameCanvas(){
         try {
@@ -18,6 +30,8 @@ public class GameCanvas extends JPanel {
             System.out.println(" Damnn ");
             e.printStackTrace();
         }
+
+        backBuffer = new BufferedImage(600, 800, BufferedImage.TYPE_INT_ARGB);
     }
 
     @Override
@@ -27,13 +41,6 @@ public class GameCanvas extends JPanel {
         // x = cx - w/2;
         // y = cy - h/2;
     }
-
-    int x = 300 - 32;
-    int y = 600;
-    boolean rightPressed = false;
-    boolean leftPressed = false;
-    boolean upPressed = false;
-    boolean downPressed = false;
 
     // Thay vì nhận phím r repaint ngta repaint liên tục
     // Dùng phương pháp gán boolen cho mỗi khi ấn phím để chạy gameLoop
@@ -71,13 +78,13 @@ public class GameCanvas extends JPanel {
         if(rightPressed){
             x += 10;
         }
-        else if(leftPressed){
+        if(leftPressed){
             x -= 10;
         }
-        else if(upPressed){
+        if(upPressed){
             y -= 10;
         }
-        else if(downPressed){
+        if(downPressed){
             y += 10;
         }
     }
