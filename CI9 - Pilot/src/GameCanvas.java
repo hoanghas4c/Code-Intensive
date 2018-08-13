@@ -31,6 +31,9 @@ public class GameCanvas extends JPanel {
     int x = 300 - 32;
     int y = 600;
     boolean rightPressed = false;
+    boolean leftPressed = false;
+    boolean upPressed = false;
+    boolean downPressed = false;
 
     // Thay vì nhận phím r repaint ngta repaint liên tục
     void KeyPressed(KeyEvent e){
@@ -38,13 +41,13 @@ public class GameCanvas extends JPanel {
             rightPressed = true;
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            x -= 10;
+            leftPressed = true;
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP){
-            y -= 10;
+            upPressed = true;
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            y += 10;
+            downPressed = true;
         }
     }
     void KeyReleased(KeyEvent e){
@@ -52,11 +55,29 @@ public class GameCanvas extends JPanel {
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             rightPressed = false;
         }
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            leftPressed = false;
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_UP){
+            upPressed = false;
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            downPressed = false;
+        }
     }
 
     void run(){
         if(rightPressed){
             x += 10;
+        }
+        else if(leftPressed){
+            x -= 10;
+        }
+        else if(upPressed){
+            y -= 10;
+        }
+        else if(downPressed){
+            y += 10;
         }
     }
 
