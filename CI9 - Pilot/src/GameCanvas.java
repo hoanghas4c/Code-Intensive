@@ -30,11 +30,12 @@ public class GameCanvas extends JPanel {
 
     int x = 300 - 32;
     int y = 600;
+    boolean rightPressed = false;
 
     // Thay vì nhận phím r repaint ngta repaint liên tục
     void KeyPressed(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            x += 10;
+            rightPressed = true;
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT){
             x -= 10;
@@ -47,7 +48,16 @@ public class GameCanvas extends JPanel {
         }
     }
     void KeyReleased(KeyEvent e){
-        System.out.println("Canvas handling key released");
+
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            rightPressed = false;
+        }
+    }
+
+    void run(){
+        if(rightPressed){
+            x += 10;
+        }
     }
 
     // Ham ve lai
