@@ -13,10 +13,11 @@ import java.util.ArrayList;
 
 public class GameCanvas extends JPanel {
 
+
     Image background;
     Image player;
     ArrayList<PlayerBullet> bs; // null
-
+    ArrayList<Enemy> es; // null
 
     Graphics backBufferGraphics;
 
@@ -28,11 +29,15 @@ public class GameCanvas extends JPanel {
     boolean downPressed = false;
     boolean xPressed = false;
     boolean shootLock = false;
+    boolean enemyAppearance = false;
 
     BufferedImage backBuffer;
 
 
     public GameCanvas(){
+
+//        Random random = new Random();
+
         bs = new ArrayList<>();
 
         PlayerBullet b1 = new PlayerBullet();
@@ -43,11 +48,24 @@ public class GameCanvas extends JPanel {
         b2.x = 268;
         b2.y = 500;
 
+
+        es = new ArrayList<>();
+
+        Enemy e1 = new Enemy();
+        e1.x = 268;
+        e1.y = 0;
+
+        Enemy e2 = new Enemy();
+        e2.x = 200;
+        e2.y = 0;
         try {
              background = ImageIO.read(new File("images/background/background.png"));
              player = ImageIO.read(new File("images/player/MB-70/player1.png"));
              b1.image = ImageIO.read(new File("images/bullet/player/mb69bullet1.png"));
              b2.image = ImageIO.read(new File("images/bullet/player/mb69bullet1.png"));
+
+             e1.image = ImageIO.read(new File("images/enemy/bacteria/bacteria1.png"));
+             e2.image = ImageIO.read(new File("images/enemy/bacteria/bacteria1.png"));
         } catch (IOException e) {
             System.out.println(" Damnn ");
             e.printStackTrace();
@@ -55,6 +73,9 @@ public class GameCanvas extends JPanel {
 
         bs.add(b1);
         bs.add(b2);
+
+        es.add(e1);
+        es.add(e2);
 
         backBuffer = new BufferedImage(600, 800, BufferedImage.TYPE_INT_ARGB);
         backBufferGraphics = backBuffer.getGraphics();
@@ -147,9 +168,27 @@ public class GameCanvas extends JPanel {
                 count = 0;
             }
         }
+
+        for(Enemy e : es){
+            e.y += 5;
+        }
+
+        Enemy newE = new Enemy();
+        newE.x = Random;
+
+
+
+        if(enemyAppearance){
+            count1++;
+            if(count1 > 15){
+                enemyAppearance = false;
+                count1 = 0;
+            }
+        }
     }
 
     int count;
+    int count1;
 
     // Ham ve lai
     // k xu li logic
@@ -159,6 +198,9 @@ public class GameCanvas extends JPanel {
 
         for(PlayerBullet b: bs){
             backBufferGraphics.drawImage(b.image, b.x , b.y , null);
+        }
+        for(Enemy e: es){
+            backBufferGraphics.drawImage(e.image, e.x, e.y, null);
         }
         this.repaint();
     }
