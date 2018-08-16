@@ -171,20 +171,51 @@ public class GameCanvas extends JPanel {
 
         for(Enemy e : es){
             e.y += 5;
-        }
 
-        Enemy newE = new Enemy();
-        newE.x = Random;
-
-
-
-        if(enemyAppearance){
-            count1++;
-            if(count1 > 15){
-                enemyAppearance = false;
-                count1 = 0;
+            if(e.y >= 800){
+                e.y = -20;
+                enemyAppearance = true;
             }
         }
+
+        if(enemyAppearance){
+            es = new ArrayList<>();
+
+            Enemy e1 = new Enemy();
+            e1.x = 268;
+            e1.y = 0;
+
+            Enemy e2 = new Enemy();
+            e2.x = 200;
+            e2.y = 0;
+            try {
+                e1.image = ImageIO.read(new File("images/enemy/bacteria/bacteria1.png"));
+                e2.image = ImageIO.read(new File("images/enemy/bacteria/bacteria1.png"));
+            } catch (IOException e) {
+                System.out.println(" Damnn ");
+                e.printStackTrace();
+            }
+
+            es.add(e1);
+            es.add(e2);
+
+            enemyAppearance = false;
+        }
+
+
+
+//        Enemy newE = new Enemy();
+//        newE.x = Random;
+//
+//
+//
+//        if(enemyAppearance){
+//            count1++;
+//            if(count1 > 15){
+//                enemyAppearance = false;
+//                count1 = 0;
+//            }
+//        }
     }
 
     int count;
