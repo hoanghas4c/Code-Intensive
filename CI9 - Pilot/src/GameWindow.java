@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.sql.SQLOutput;
 
 public class GameWindow extends JFrame
 {
@@ -44,10 +42,11 @@ public class GameWindow extends JFrame
         this.setVisible(true);
     }
 
-    long lastTimeRender = 0;
-    void mainLoop() throws IOException {
+    void mainLoop(){
+        long lastTimeRender = 0;
+        long currentTime = 0;
         while(true){
-            long currentTime = System.nanoTime();
+            currentTime = System.nanoTime();
             if( currentTime - lastTimeRender >= 17_000_000){
                 gameCanvas.render();
                 gameCanvas.run();
