@@ -20,12 +20,12 @@ public class GameWindow extends JFrame
 
             @Override
             public void keyPressed(KeyEvent e) {
-                gameCanvas.KeyPressed(e);
+                gameCanvas.inputManager.KeyPressed(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                gameCanvas.KeyReleased(e);
+                gameCanvas.inputManager.KeyReleased(e);
             }
         });
 
