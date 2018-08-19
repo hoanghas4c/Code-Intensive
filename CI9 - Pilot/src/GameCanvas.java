@@ -56,7 +56,7 @@ public class GameCanvas extends JPanel {
 
     void run() {
         player.run();
-        player.shoot();
+        player.shoot(bullets);
 
 //        if(inputManager.xPressed && !player.shootLock){
 //            PlayerBullet newB = new PlayerBullet(player.x, player.y);

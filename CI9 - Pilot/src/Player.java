@@ -35,9 +35,7 @@ public class Player {
 
     boolean shootLock = false;
     int count ;
-    ArrayList<PlayerBullet> bullets;
-
-    void shoot(){
+    void shoot(ArrayList<PlayerBullet> bullets){
 
         if(inputManager.xPressed && !shootLock){
             PlayerBullet newB = new PlayerBullet(this.x, this.y);
