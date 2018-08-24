@@ -11,6 +11,8 @@ public class GameCanvas extends JPanel {
 
 
     Image background;
+    Vector2D vector2D;
+
 
     Player player;
     ArrayList<PlayerBullet> bullets; // null
@@ -19,7 +21,6 @@ public class GameCanvas extends JPanel {
 
     InputManager inputManager;
 
-    int count;
     int enemySpawnCount = 0;
 
 
@@ -37,6 +38,7 @@ public class GameCanvas extends JPanel {
         enemies = new ArrayList<>();
 
         player = new Player(268, 600);
+        player.bullets = this.bullets;
         player.inputManager = inputManager;// reference point to
 
         background = ImageUtil.load("images/background/background.png");
@@ -56,18 +58,8 @@ public class GameCanvas extends JPanel {
 
     void run() {
         player.run();
-        player.shoot(bullets);
+        player.shoot();
 
-//        if(inputManager.xPressed && !player.shootLock){
-//            PlayerBullet newB = new PlayerBullet(player.x, player.y);
-//            bullets.add(newB);
-//            player.shootLock = true;
-//        }
-//
-//        for(PlayerBullet b: bullets)
-//        {
-//            b.run();
-//        }
         for(Enemy e : enemies){
             e.run();
         }
@@ -79,16 +71,6 @@ public class GameCanvas extends JPanel {
             Enemy enemy = new Enemy(posX, 0);
             enemies.add(enemy);
         }
-
-//        if(player.shootLock){
-//            count++;
-//            if(count > 20)
-//            {
-//                player.shootLock = false;
-//                count = 0;
-//            }
-//        }
-
     }
 
     // Ham ve lai

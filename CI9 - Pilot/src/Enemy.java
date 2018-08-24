@@ -17,6 +17,6 @@ public class Enemy {
 
     //logic thuần
     void run(){
-        this.y += 5;
+        this.y += 3;
     }
 }

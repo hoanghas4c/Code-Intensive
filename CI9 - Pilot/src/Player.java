@@ -2,46 +2,56 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Player {
-    int x ;
-    int y ;
+    Vector2D position;
+
     Image image;
     InputManager inputManager;
+    ArrayList<PlayerBullet> bullets;
 
     Player(int x, int y){
-        this.x = x;
-        this.y = y;
+        this.position = new Vector2D(x, y);
         this.image = ImageUtil.load("images/player/MB-70/player1.png");
-    }
-
-    // Method inserted
-    void render(Graphics g){
-        g.drawImage(this.image, this.x, this.y, null);
-    }
-
-    void run(){
-        if(inputManager.rightPressed){
-            this.x += 5;
-        }
-        if(inputManager.leftPressed){
-            this.x -= 5;
-        }
-        if(inputManager.upPressed){
-            this.y -= 5;
-        }
-        if(inputManager.downPressed){
-            this.y += 5;
-        }
     }
 
     boolean shootLock = false;
     int count ;
-    void shoot(ArrayList<PlayerBullet> bullets){
 
-        if(inputManager.xPressed && !shootLock){
-            PlayerBullet newB = new PlayerBullet(this.x, this.y);
-            bullets.add(newB);
-            shootLock = true;
+    // Method inserted
+    void render(Graphics g){
+        g.drawImage(this.image, (int)this.position.x, (int)this.position.y, null);
+    }
+
+    void run(){
+        this.move();
+        this.fire();
+    }
+
+    void shoot() {
+        if(this.inputManager.xPressed && !this.shootLock){
+            PlayerBullet newBullet = new PlayerBullet((int)this.position.x ,(int)this.position.y);
+            this.bullets.add(newBullet);
+            this.shootLock = true;
         }
+    }
+
+    void move(){
+        Vector2D velocity = new Vector2D();
+        if(inputManager.rightPressed){
+            velocity.x += 5;
+        }
+        if(inputManager.leftPressed){
+            velocity.x -= 5;
+        }
+        if(inputManager.upPressed){
+            velocity.y -= 5;
+        }
+        if(inputManager.downPressed){
+            velocity.y += 5;
+        }
+        this.position.addUp(velocity);
+    }
+
+    void fire(){
 
         for(PlayerBullet b: bullets)
         {
