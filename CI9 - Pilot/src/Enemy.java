@@ -1,22 +1,22 @@
 import java.awt.*;
 
 public class Enemy {
-    int x;
-    int y;
+    Vector2D position;
     Image image;
 
     Enemy(int x, int y){
-       this.x = x;
-       this.y = y;
+       this.position = new Vector2D(x, y);
        this.image = ImageUtil.load("images/enemy/bacteria/bacteria1.png");
     }
 
     void render(Graphics g){
-        g.drawImage(this.image, this.x, this.y, null);
+        g.drawImage(this.image, (int)position.x, (int)position.y, null);
     }
 
     //logic thuần
     void run(){
-        this.y += 3;
+        Vector2D velocity = new Vector2D();
+        velocity.y += 3;
+        this.position.addUp(velocity);
     }
 }

@@ -23,7 +23,7 @@ public class Player {
 
     void run(){
         this.move();
-        this.fire();
+        this.shoot();
     }
 
     void shoot() {
@@ -31,6 +31,20 @@ public class Player {
             PlayerBullet newBullet = new PlayerBullet((int)this.position.x ,(int)this.position.y);
             this.bullets.add(newBullet);
             this.shootLock = true;
+        }
+
+        for(PlayerBullet b: bullets)
+        {
+            b.run();
+        }
+
+        if(shootLock){
+            count++;
+            if(count > 20)
+            {
+                shootLock = false;
+                count = 0;
+            }
         }
     }
 
@@ -51,22 +65,5 @@ public class Player {
         this.position.addUp(velocity);
     }
 
-    void fire(){
-
-        for(PlayerBullet b: bullets)
-        {
-            b.run();
-        }
-
-        if(shootLock){
-            count++;
-            if(count > 20)
-            {
-                shootLock = false;
-                count = 0;
-            }
-        }
-
-    }
 }
 
