@@ -1,17 +1,19 @@
 package Players;
 
 import java.awt.*;
+import Bases.Vector2D;
+import Bases.ImageUtil;
 
 public class PlayerBullet {
     Vector2D position;
     Image image;
 
-    PlayerBullet(int x, int y){
+    public PlayerBullet(int x, int y){
         this.position = new Vector2D(x ,y);
         this.image = ImageUtil.load("images/bullet/player/mb69bullet1.png");
     }
 
-    void render(Graphics g){
+    public void render(Graphics g){
         g.drawImage(this.image, (int)position.x, (int)position.y, null);
     }
 

@@ -1,10 +1,10 @@
 package Bases;
 
 public class Vector2D {
-    float x;
-    float y;
+    public float x;
+    public float y;
 
-    Vector2D(float x, float y) {
+    public Vector2D(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -22,7 +22,7 @@ public class Vector2D {
         this.y += y;
     }
 
-    void addUp(Vector2D other)
+    public void addUp(Vector2D other)
     {
         this.addUp(other.x, other.y);
     }

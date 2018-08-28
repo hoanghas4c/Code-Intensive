@@ -11,7 +11,7 @@ public class InputManager {
 
     public static InputManager instance = new InputManager();
 
-    void KeyPressed(KeyEvent e){
+    public void KeyPressed(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             rightPressed = true;
         }
@@ -28,7 +28,7 @@ public class InputManager {
             xPressed = true;
         }
     }
-    void KeyReleased(KeyEvent e){
+    public void KeyReleased(KeyEvent e){
 
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             rightPressed = false;

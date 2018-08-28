@@ -46,7 +46,7 @@ public class GameWindow extends JFrame
         this.setVisible(true);
     }
 
-    void mainLoop(){
+    public void mainLoop(){
         long lastTimeRender = 0;
         long currentTime = 0;
         while(true){

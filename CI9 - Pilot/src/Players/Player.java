@@ -13,9 +13,9 @@ public class Player {
     PlayerMove playerMove;
     PLayerShoot pLayerShoot;
 
-    ArrayList<PlayerBullet> bullets;
+    public ArrayList<PlayerBullet> bullets;
 
-    Player(int x, int y){
+    public Player(int x, int y){
         this.position = new Vector2D(x, y);
         imageRenderer = new ImageRenderer("images/player/MB-70/player1.png");
         playerMove = new PlayerMove();
@@ -24,11 +24,11 @@ public class Player {
 
 
     // Method inserted
-    void render(Graphics g){
+    public void render(Graphics g){
             imageRenderer.render(g, this.position);
     }
 
-    void run(){
+    public void run(){
         this.move();
         this.shoot();//shoot
     }

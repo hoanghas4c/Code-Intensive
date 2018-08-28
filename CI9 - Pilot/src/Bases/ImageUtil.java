@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageUtil {
-    static Image load(String url){
+    public static Image load(String url){
         Image img = null;
         try {
             img = ImageIO.read(new File(url));

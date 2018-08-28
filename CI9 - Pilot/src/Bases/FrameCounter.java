@@ -3,15 +3,15 @@ package Bases;
 public class FrameCounter {
     int count ;
     int limit;
-    boolean expired;
+    public boolean expired;
 
-    FrameCounter(int limit){
+    public FrameCounter(int limit){
         this.limit = limit;
         this.count = 0;
         this.expired = false;
     }
 
-    void run(){
+    public void run(){
         count++;
         if(count >= limit){
             expired = true;
@@ -21,7 +21,7 @@ public class FrameCounter {
         }
     }
 
-    void reset(){
+    public void reset(){
         count = 0;
         expired = false;
     }

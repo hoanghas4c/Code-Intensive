@@ -1,5 +1,8 @@
 package Players;
 
+import Bases.FrameCounter;
+import Inputs.InputManager;
+
 public class PLayerShoot {
     boolean shootLock = false;//shoot
     FrameCounter frameCounter =  new FrameCounter(20);
