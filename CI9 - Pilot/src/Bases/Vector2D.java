@@ -1,3 +1,5 @@
+package Bases;
+
 public class Vector2D {
     float x;
     float y;
@@ -7,7 +9,7 @@ public class Vector2D {
         this.y = y;
     }
 
-    Vector2D(){
+    public Vector2D(){
         this(0, 0);
     }
     void  print(){

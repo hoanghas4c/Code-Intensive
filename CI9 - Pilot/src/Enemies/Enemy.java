@@ -1,3 +1,8 @@
+package Enemies;
+
+import Bases.ImageUtil;
+import Bases.Vector2D;
+
 import java.awt.*;
 
 public class Enemy {

@@ -1,3 +1,7 @@
+package Game;
+
+import Inputs.InputManager;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -20,12 +24,12 @@ public class GameWindow extends JFrame
 
             @Override
             public void keyPressed(KeyEvent e) {
-                gameCanvas.inputManager.KeyPressed(e);
+                InputManager.instance.KeyPressed(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                gameCanvas.inputManager.KeyReleased(e);
+                InputManager.instance.KeyReleased(e);
             }
         });
 
