@@ -1,8 +1,8 @@
 package Game;
 
 import Bases.ImageUtil;
-import Bases.Vector2D;
 import Enemies.Enemy;
+import Enemies.EnemySpawn;
 import Players.Player;
 import Players.PlayerBullet;
 
@@ -19,24 +19,25 @@ public class GameCanvas extends JPanel {
 
 
     Image background;
-    Vector2D vector2D;
 
-
+    EnemySpawn enemySpawn;
     Player player;
     ArrayList<PlayerBullet> bullets; // null
     ArrayList<Enemy> enemies; // null
 
 
-    int enemySpawnCount = 0;
+//    int enemySpawnCount = 0;
     BufferedImage backBuffer;
     Graphics backBufferGraphics;
     Random random;
 
     public GameCanvas(){
 
+        enemySpawn = new EnemySpawn();
         random = new Random();
         bullets = new ArrayList<>();
         enemies = new ArrayList<>();
+        enemySpawn.enemies = enemies;
 
         player = new Player(268, 600);
         player.bullets = this.bullets;
@@ -62,13 +63,14 @@ public class GameCanvas extends JPanel {
             e.run();
         }
 
-        enemySpawnCount++;
-        if(enemySpawnCount > 60){
-            enemySpawnCount = 0;
-            int posX = random.nextInt(600);
-            Enemy enemy = new Enemy(posX, 0);
-            enemies.add(enemy);
-        }
+        enemySpawn.run();
+//        enemySpawnCount++;
+//        if(enemySpawnCount > 60){
+//            enemySpawnCount = 0;
+//            int posX = random.nextInt(600);
+//            Enemy enemy = new Enemy(posX, 0);
+//            enemies.add(enemy);
+//        }
     }
 
     // Ham ve lai
