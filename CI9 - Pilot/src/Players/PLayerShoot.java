@@ -1,6 +1,8 @@
 package Players;
 
 import Bases.FrameCounter;
+import Bases.GameObject;
+import Bases.Vector2D;
 import Inputs.InputManager;
 
 public class PLayerShoot {
@@ -9,8 +11,9 @@ public class PLayerShoot {
 
     void run(Player player){
         if(InputManager.instance.xPressed && !this.shootLock){
-            PlayerBullet newBullet = new PlayerBullet((int)player.position.x ,(int)player.position.y);
-            player.bullets.add(newBullet);
+            Vector2D bulletPosition = player.position.subtract(0, 30);
+            PlayerBullet newBullet = new PlayerBullet((int)bulletPosition.x ,(int)bulletPosition.y);
+            GameObject.add(newBullet);
             this.shootLock = true;
         }
 

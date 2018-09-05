@@ -1,10 +1,12 @@
 package Game;
 
 import Bases.ImageUtil;
+import Bases.GameObject;
 import Enemies.Enemy;
 import Enemies.EnemySpawn;
 import Players.Player;
 import Players.PlayerBullet;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,13 +14,11 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-// Ve Game
-
 public class GameCanvas extends JPanel {
 
 
     Image background;
+    GameObject gameObject;
 
     EnemySpawn enemySpawn;
     Player player;
@@ -26,7 +26,7 @@ public class GameCanvas extends JPanel {
     ArrayList<Enemy> enemies; // null
 
 
-//    int enemySpawnCount = 0;
+//   int enemySpawnCount = 0;
     BufferedImage backBuffer;
     Graphics backBufferGraphics;
     Random random;
@@ -39,8 +39,10 @@ public class GameCanvas extends JPanel {
         enemies = new ArrayList<>();
         enemySpawn.enemies = enemies;
 
-        player = new Player(268, 600);
-        player.bullets = this.bullets;
+        player = new Player(300, 700);
+
+        GameObject.add(player);
+
         background = ImageUtil.load("images/background/background.png");
 
         backBuffer = new BufferedImage(600, 800, BufferedImage.TYPE_INT_ARGB);
@@ -52,39 +54,20 @@ public class GameCanvas extends JPanel {
        g.drawImage(backBuffer, 0 , 0 , null);
     }
 
-    // Thay vì nhận phím r repaint ngta repaint liên tục
-    // Dùng phương pháp gán boolen cho mỗi khi ấn phím để chạy gameLoop
-
-
     void run() {
-        player.run();
+        GameObject.runAll();
 
         for(Enemy e : enemies){
             e.run();
         }
 
         enemySpawn.run();
-//        enemySpawnCount++;
-//        if(enemySpawnCount > 60){
-//            enemySpawnCount = 0;
-//            int posX = random.nextInt(600);
-//            Enemy enemy = new Enemy(posX, 0);
-//            enemies.add(enemy);
-//        }
     }
-
-    // Ham ve lai
-    // k xu li logic
+    
     void render(){
         backBufferGraphics.drawImage(background, 0, 0, null);
-        player.render(backBufferGraphics);
 
-        for(PlayerBullet b: bullets){
-            b.render(backBufferGraphics);
-        }
-        for(Enemy e: enemies){
-            e.render(backBufferGraphics);
-        }
+        gameObject.renderAll(backBufferGraphics);
         this.repaint();
     }
 }

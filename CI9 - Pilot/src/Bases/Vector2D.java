@@ -16,7 +16,7 @@ public class Vector2D {
         System.out.println(this.x + " , " + this.y);
     }
 
-    void addUp(float x, float y)
+    public void addUp(float x, float y)
     {
         this.x += x;
         this.y += y;
@@ -29,7 +29,7 @@ public class Vector2D {
 
 
 
-    Vector2D add(float x, float y){
+    public Vector2D add(float x, float y){
         return new Vector2D(this.x + x, this.y +y);
     }
 
@@ -37,17 +37,22 @@ public class Vector2D {
         return this.add(other.x, other.y);
     }
 
-
-
-    void subtractBy(float x, float y){
+    void subtractBy(float x, float y) {
         this.x -= x;
         this.y -= y;
     }
 
-    Vector2D subtract(Vector2D other){
-       return new Vector2D(other.x  , other.y );
+    void subtractBy(Vector2D other) {
+        this.subtractBy(other.x, other.y);
     }
 
+    public Vector2D subtract(float x, float y) {
+        return new Vector2D(this.x - x, this.y - y);
+    }
+
+    Vector2D subtract(Vector2D other) {
+        return this.subtract(other.x, other.y);
+    }
 
     void scaleBy(float m){
         this.x *= m;
