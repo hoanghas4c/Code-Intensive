@@ -1,6 +1,7 @@
 package Enemies;
 
 import Bases.FrameCounter;
+import Bases.GameObject;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,6 +12,7 @@ public class EnemySpawn {
     FrameCounter frameCounter = new FrameCounter(30);
     public EnemySpawn(){
         random = new Random();
+
     }
 
     public void run(){
@@ -18,7 +20,7 @@ public class EnemySpawn {
         if (frameCounter.expired){
             int posX = random.nextInt(600);
             Enemy enemy = new Enemy(posX, 0);
-            enemies.add(enemy);
+            GameObject.add(enemy);
             frameCounter.reset();
         }
     }

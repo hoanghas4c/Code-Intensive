@@ -21,12 +21,12 @@ public class GameCanvas extends JPanel {
     GameObject gameObject;
 
     EnemySpawn enemySpawn;
+    Enemy enemy;
     Player player;
     ArrayList<PlayerBullet> bullets; // null
     ArrayList<Enemy> enemies; // null
 
 
-//   int enemySpawnCount = 0;
     BufferedImage backBuffer;
     Graphics backBufferGraphics;
     Random random;
@@ -42,6 +42,7 @@ public class GameCanvas extends JPanel {
         player = new Player(300, 700);
 
         GameObject.add(player);
+        GameObject.add(enemy);
 
         background = ImageUtil.load("images/background/background.png");
 
@@ -63,7 +64,7 @@ public class GameCanvas extends JPanel {
 
         enemySpawn.run();
     }
-    
+
     void render(){
         backBufferGraphics.drawImage(background, 0, 0, null);
 
