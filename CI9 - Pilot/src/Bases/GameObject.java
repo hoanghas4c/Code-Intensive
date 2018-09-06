@@ -21,6 +21,7 @@ public class GameObject {
             go.run();
         }
 
+
         gameObjects.addAll(newGameObjects);
         newGameObjects.clear();
     }
@@ -29,6 +30,7 @@ public class GameObject {
         for (GameObject go: gameObjects){
             go.render(g);
         }
+
     }
 
     public GameObject(int x, int y){
