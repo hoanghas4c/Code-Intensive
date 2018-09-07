@@ -1,5 +1,7 @@
 package Bases;
 
+import java.awt.*;
+
 public class BoxCollider extends GameObject{
     private int width;
     private int height;
@@ -15,9 +17,8 @@ public class BoxCollider extends GameObject{
         return this.position.y - this.height / 2;
     }
 
-
     private float bot(){
-        return  this.position.y - this.height / 2;
+        return  this.position.y + this.height / 2;
     }
 
     private float left(){
@@ -28,13 +29,17 @@ public class BoxCollider extends GameObject{
         return this.position.x + this.width / 2;
     }
 
-    public boolean collideWith(BoxCollider boxCollider){
+    public boolean collideWith(BoxCollider other){
         //this vs other
         boolean xOverlap = this.left() <= other.right() &&
-                other.left <= this.right();
-        boolean yOverlap = this.bot() >= other.top &&
-                other.bot >= this.top();
+                other.left() <= this.right();
+        boolean yOverlap = this.bot() >= other.top() &&
+                other.bot() >= this.top();
 
         return xOverlap && yOverlap;
+    }
+
+    public void render(Graphics g){
+        g.drawRect((int) this.left(),(int) this.top(), this.width, this.height);
     }
 }

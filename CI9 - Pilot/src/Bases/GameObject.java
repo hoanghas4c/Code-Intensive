@@ -9,6 +9,7 @@ public class GameObject {
 
     public  Vector2D position;
     public  ImageRenderer imageRenderer;
+    public boolean isActive;
 
     private static ArrayList<GameObject> gameObjects = new ArrayList<>();
     private static ArrayList<GameObject> newGameObjects = new ArrayList<>();
@@ -20,7 +21,10 @@ public class GameObject {
 
     public static void runAll(){
         for (GameObject go: gameObjects){
-            go.run();
+            if(go.isActive){
+                go.run();
+            }
+
         }
 
 
@@ -30,7 +34,10 @@ public class GameObject {
 
     public static void renderAll(Graphics g){
         for (GameObject go: gameObjects){
-            go.render(g);
+            if(go.isActive)
+            {
+                go.render(g);
+            }
         }
 
     }
@@ -38,18 +45,20 @@ public class GameObject {
     public GameObject(int x, int y){
         this.position = new Vector2D(x, y);
         this.imageRenderer = null;
+        this.imageRenderer = null;
+        this.isActive = true;
     }
 
-    public void run(){
 
-    }
+
+    public BoxCollider boxCollider;
 
     public static Enemy checkCollision(BoxCollider boxCollider){
 
         Enemy result = null;
 
         for (GameObject go: gameObjects){
-            if(go.boxCollider != null){
+            if(go.boxCollider != null && go.isActive){
                 if(go instanceof Enemy){
                     if(go.boxCollider.collideWith(boxCollider)){
                         result = (Enemy)go;
@@ -60,10 +69,26 @@ public class GameObject {
         return  result;
     }
 
+    public void run(){
+        if(this.boxCollider != null){
+            this.boxCollider.position.x = this.position.x;
+            this.boxCollider.position.y = this.position.y;
+            this.boxCollider.run();
+        }
+    }
+
     public void render(Graphics g){
         if (this.imageRenderer != null){
             this.imageRenderer.render(g, this.position);
         }
+
+        if(this.boxCollider != null){
+            this.boxCollider.render(g);
+        }
+    }
+
+    public void destroy(){
+        this.isActive = false;
     }
 
 }
