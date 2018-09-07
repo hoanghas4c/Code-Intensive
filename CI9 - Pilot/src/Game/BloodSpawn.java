@@ -4,10 +4,11 @@ import Bases.FrameCounter;
 import Bases.GameObject;
 import java.util.Random;
 
-public class BloodSpawn{
+public class BloodSpawn extends GameObject {
     Random random;
     FrameCounter frameCounter = new FrameCounter(100);
     public BloodSpawn(){
+        super(0, 0);
         random = new Random();
     }
 

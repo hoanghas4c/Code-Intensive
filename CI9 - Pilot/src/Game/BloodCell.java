@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class BloodCell extends GameObject {
     public ArrayList<BloodCell> bloodCells;
-    BloodSpawn bloodSpawn;
 
     public BloodCell(int x, int y){
         super(x, y);
