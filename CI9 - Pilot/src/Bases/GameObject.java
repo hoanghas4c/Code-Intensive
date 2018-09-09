@@ -1,6 +1,7 @@
 package Bases;
 
 import Enemies.Enemy;
+import Players.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class GameObject {
     public  Vector2D position;
     public  ImageRenderer imageRenderer;
     public boolean isActive;
+    public boolean isAlive;
 
     private static ArrayList<GameObject> gameObjects = new ArrayList<>();
     private static ArrayList<GameObject> newGameObjects = new ArrayList<>();
@@ -26,7 +28,6 @@ public class GameObject {
             }
 
         }
-
 
         gameObjects.addAll(newGameObjects);
         newGameObjects.clear();
@@ -47,6 +48,7 @@ public class GameObject {
         this.imageRenderer = null;
         this.imageRenderer = null;
         this.isActive = true;
+        this.isAlive = true;
     }
 
 
@@ -62,6 +64,20 @@ public class GameObject {
                 if(go instanceof Enemy){
                     if(go.boxCollider.collideWith(boxCollider)){
                         result = (Enemy)go;
+                    }
+                }
+            }
+        }
+        return  result;
+    }
+
+    public static Player playerCollision(BoxCollider boxCollider){
+        Player result = null;
+        for (GameObject go: gameObjects){
+            if(go.boxCollider != null && go.isActive){
+                if(go instanceof Player){
+                    if(go.boxCollider.collideWith(boxCollider)){
+                        result = (Player) go;
                     }
                 }
             }

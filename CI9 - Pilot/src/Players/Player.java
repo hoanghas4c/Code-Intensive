@@ -1,7 +1,9 @@
 package Players;
 
+import Bases.BoxCollider;
 import Bases.GameObject;
 import Bases.ImageRenderer;
+import Enemies.Enemy;
 
 public class Player extends GameObject {
     PlayerMove playerMove;
@@ -12,12 +14,14 @@ public class Player extends GameObject {
         imageRenderer = new ImageRenderer("images/player/MB-70/player1.png");
         playerMove = new PlayerMove();
         pLayerShoot = new PLayerShoot();
+        this.boxCollider = new BoxCollider(x, y, 25, 80);
     }
 
     public void run(){
         super.run();
         this.move();
         this.shoot();//shoot
+        hitEnemies();
     }
 
     void shoot() {
@@ -28,5 +32,17 @@ public class Player extends GameObject {
         this.playerMove.run(this.position);
     }
 
+    private void hitEnemies(){
+        Enemy enemy = GameObject.checkCollision(this.boxCollider);
+        if(enemy != null){
+            System.out.println("Hit!");
+            enemy.getHit();
+            this.destroy();
+        }
+    }
+
+    public void getHit() {
+        this.destroy();
+    }
 }
 
