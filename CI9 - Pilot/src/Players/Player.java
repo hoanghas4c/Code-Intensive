@@ -11,7 +11,7 @@ public class Player extends GameObject {
 
     public Player(int x, int y){
         super(x, y);
-        imageRenderer = new ImageRenderer("images/player/MB-70/player1.png");
+        renderer = new ImageRenderer("images/player/MB-70/player1.png");
         playerMove = new PlayerMove();
         pLayerShoot = new PLayerShoot();
         this.boxCollider = new BoxCollider(x, y, 25, 80);
@@ -33,7 +33,7 @@ public class Player extends GameObject {
     }
 
     private void hitEnemies(){
-        Enemy enemy = GameObject.checkCollision(this.boxCollider);
+        Enemy enemy = GameObject.checkCollision(this.boxCollider, Enemy.class);
         if(enemy != null){
             System.out.println("Hit!");
             enemy.getHit();

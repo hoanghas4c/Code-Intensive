@@ -8,7 +8,7 @@ import Enemies.Enemy;
 public class PlayerBullet extends GameObject{
     public PlayerBullet(int x, int y){
         super(x, y);
-        imageRenderer = new ImageRenderer("images/bullet/player/mb69bullet1.png");
+        renderer = new ImageRenderer("images/bullet/player/mb69bullet1.png");
         this.boxCollider = new BoxCollider(x, y , 10 , 20);
     }
 
@@ -16,6 +16,13 @@ public class PlayerBullet extends GameObject{
         super.run();
         this.move();
         hitEnemies();
+        deactivateIfNeeded();
+    }
+
+    private void deactivateIfNeeded() {
+        if(this.position.y < 0){
+            this.isActive = false;
+        }
     }
 
     private void move() {
@@ -23,7 +30,7 @@ public class PlayerBullet extends GameObject{
     }
 
     private void hitEnemies() {
-        Enemy enemy = GameObject.checkCollision(this.boxCollider);
+        Enemy enemy = GameObject.checkCollision(this.boxCollider, Enemy.class);
         if ( enemy != null){
             System.out.println("HIT");
             enemy.getHit();

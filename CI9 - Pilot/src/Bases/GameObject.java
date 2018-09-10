@@ -1,7 +1,6 @@
 package Bases;
 
-import Enemies.Enemy;
-import Players.Player;
+import Players.PlayerBullet;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 public class GameObject {
 
     public  Vector2D position;
-    public  ImageRenderer imageRenderer;
+    public  Renderer renderer;
     public boolean isActive;
     public static boolean isAlive;
 
@@ -31,6 +30,7 @@ public class GameObject {
 
         gameObjects.addAll(newGameObjects);
         newGameObjects.clear();
+        System.out.println(gameObjects.size());
     }
 
     public static void renderAll(Graphics g){
@@ -40,30 +40,76 @@ public class GameObject {
                 go.render(g);
             }
         }
+    }
 
+
+//    public static <R extends GameObject> R recycle(int x, int y, Class<R> cls ){
+//        R result = null;
+//        R r = null;
+//        for(GameObject go: gameObjects){
+//            if(!go.isActive){
+//                if(go.getClass().equals(cls)){
+//                    r = (R) go;
+//                }
+//            }
+//        }
+//
+//        if(r == null){
+//            r = (R) new GameObject(x, y);
+//            GameObject.add(r);
+//        }
+//        else{
+//            r.isActive = true;
+//            r.position.x = x;
+//            r.position.y = y;
+//        }
+//        return r;
+//    }
+
+    public static PlayerBullet recycle(int x, int y){
+        PlayerBullet pb = null;
+
+        for(GameObject go: gameObjects){
+            if(!go.isActive){
+                if(go instanceof  PlayerBullet){
+                    pb = (PlayerBullet) go;
+                }
+            }
+        }
+
+        if(pb == null){
+            pb = new PlayerBullet(x, y);
+            GameObject.add(pb);
+        }
+        else{
+            pb.isActive = true;
+            pb.position.x = x;
+            pb.position.y = y;
+        }
+
+        return pb;
     }
 
     public GameObject(int x, int y){
         this.position = new Vector2D(x, y);
-        this.imageRenderer = null;
-        this.imageRenderer = null;
+        this.renderer = null;
+        this.renderer = null;
         this.isActive = true;
         this.isAlive = true;
     }
 
-
-
     public BoxCollider boxCollider;
 
-    public static Enemy checkCollision(BoxCollider boxCollider){
+    //Generics
+    public static <T extends GameObject> T checkCollision(BoxCollider boxCollider, Class<T> cls){
 
-        Enemy result = null;
+        T result = null;
 
         for (GameObject go: gameObjects){
             if(go.boxCollider != null && go.isActive){
-                if(go instanceof Enemy){
+                if(go.getClass().equals(cls)){
                     if(go.boxCollider.collideWith(boxCollider)){
-                        result = (Enemy)go;
+                        result = (T)go;
                     }
                 }
             }
@@ -71,19 +117,20 @@ public class GameObject {
         return  result;
     }
 
-    public static Player playerCollision(BoxCollider boxCollider){
-        Player result = null;
-        for (GameObject go: gameObjects){
-            if(go.boxCollider != null && go.isActive){
-                if(go instanceof Player){
-                    if(go.boxCollider.collideWith(boxCollider)){
-                        result = (Player) go;
-                    }
-                }
-            }
-        }
-        return  result;
-    }
+//
+//    public static Player playerCollision(BoxCollider boxCollider){
+//        Player result = null;
+//        for (GameObject go: gameObjects){
+//            if(go.boxCollider != null && go.isActive){
+//                if(go instanceof Player){
+//                    if(go.boxCollider.collideWith(boxCollider)){
+//                        result = (Player) go;
+//                    }
+//                }
+//            }
+//        }
+//        return  result;
+//    }
 
     public void run(){
         if(this.boxCollider != null){
@@ -94,8 +141,8 @@ public class GameObject {
     }
 
     public void render(Graphics g){
-        if (this.imageRenderer != null){
-            this.imageRenderer.render(g, this.position);
+        if (this.renderer != null){
+            this.renderer.render(g, this.position);
         }
 
         if(this.boxCollider != null){

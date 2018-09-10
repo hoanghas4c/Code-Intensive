@@ -9,7 +9,7 @@ public class Enemy extends GameObject {
     public Enemy(int x, int y){
         super(x, y);
         enemyShoot = new EnemyShoot();
-        imageRenderer = new ImageRenderer("images/enemy/bacteria/bacteria1.png");
+        renderer = new ImageRenderer("images/enemy/bacteria/bacteria1.png");
         this.boxCollider = new BoxCollider(x, y, 30, 30);
     }
 

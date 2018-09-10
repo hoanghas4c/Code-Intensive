@@ -11,7 +11,7 @@ public class BloodCell extends GameObject {
     public BloodCell(int x, int y){
         super(x, y);
         bloodCells = new ArrayList<>();
-        imageRenderer = new ImageRenderer("images/blood cells/blood-cell1.png");
+        renderer = new ImageRenderer("images/blood cells/blood-cell1.png");
     }
 
 

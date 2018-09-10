@@ -2,7 +2,7 @@ package Bases;
 
 import java.awt.*;
 
-public class ImageRenderer {
+public class ImageRenderer extends Renderer{
     Image image;
 
     public ImageRenderer(String url){

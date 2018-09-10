@@ -8,7 +8,7 @@ public class BackGround extends GameObject {
     BackGround(int x, int y)
     {
         super(x, y);
-        imageRenderer = new ImageRenderer("images/background/background.png");
+        renderer = new ImageRenderer("images/background/background.png");
     }
 
 }
