@@ -1,15 +1,23 @@
 package Enemies;
 
-import Bases.BoxCollider;
-import Bases.GameObject;
-import Bases.ImageRenderer;
+import Bases.*;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class Enemy extends GameObject {
     EnemyShoot enemyShoot;
     public Enemy(int x, int y){
         super(x, y);
+
+        ArrayList<Image> images = new ArrayList<>();
+        images.add(ImageUtil.load("images/enemy/bacteria/bacteria1.png"));
+        images.add(ImageUtil.load("images/enemy/bacteria/bacteria2.png"));
+        images.add(ImageUtil.load("images/enemy/bacteria/bacteria3.png"));
+        images.add(ImageUtil.load("images/enemy/bacteria/bacteria4.png"));
+
         enemyShoot = new EnemyShoot();
-        renderer = new ImageRenderer("images/enemy/bacteria/bacteria1.png");
+        renderer = new Animations(images);
         this.boxCollider = new BoxCollider(x, y, 30, 30);
     }
 
