@@ -10,14 +10,19 @@ public class Enemy extends GameObject {
     public Enemy(int x, int y){
         super(x, y);
 
-        ArrayList<Image> images = new ArrayList<>();
-        images.add(ImageUtil.load("images/enemy/bacteria/bacteria1.png"));
-        images.add(ImageUtil.load("images/enemy/bacteria/bacteria2.png"));
-        images.add(ImageUtil.load("images/enemy/bacteria/bacteria3.png"));
-        images.add(ImageUtil.load("images/enemy/bacteria/bacteria4.png"));
+//        ArrayList<Image> images = new ArrayList<>();
+//        images.add(ImageUtil.load("images/enemy/bacteria/bacteria1.png"));
+//        images.add(ImageUtil.load("images/enemy/bacteria/bacteria2.png"));
+//        images.add(ImageUtil.load("images/enemy/bacteria/bacteria3.png"));
+//        images.add(ImageUtil.load("images/enemy/bacteria/bacteria4.png"));
 
         enemyShoot = new EnemyShoot();
-        renderer = new Animations(images);
+        renderer = new Animations(
+                ImageUtil.load("images/enemy/bacteria/bacteria1.png"),
+                ImageUtil.load("images/enemy/bacteria/bacteria2.png"),
+                ImageUtil.load("images/enemy/bacteria/bacteria3.png"),
+                ImageUtil.load("images/enemy/bacteria/bacteria4.png")
+        );
         this.boxCollider = new BoxCollider(x, y, 30, 30);
     }
 
@@ -36,5 +41,10 @@ public class Enemy extends GameObject {
 
     public void getHit(){
         this.destroy();
+        EnemyExplosion enemyExplosion = new EnemyExplosion((int)this.position.x,
+                (int)this.position.y);
+        enemyExplosion.run();
+        GameObject.add(enemyExplosion);
+
     }
 }

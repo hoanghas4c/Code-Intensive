@@ -2,22 +2,29 @@ package Bases;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Animations extends Renderer{
+    public boolean finished;
+    private boolean oneTime;
+
     ArrayList<Image> images;
     int imageIndex;
     FrameCounter frameCounter;
 
-    public Animations(ArrayList<Image> images){
-        this(images, 20);
+    public Animations(Image...imgs){
+        this(10, false, imgs);
     }
 
-
     //load anh
-    public Animations(ArrayList<Image> images, int frameDelay){
-        this.images = images;
+    public Animations(int frameDelay, boolean oneTime, Image ... imgs ){
+        this.images = new ArrayList<>();
+        this.images.addAll(Arrays.asList(imgs));
+        this.oneTime = oneTime;
+
         this.imageIndex = 0;
         this.frameCounter = new FrameCounter(frameDelay);
+        this.finished = false;
     }
 
     // ve anh
@@ -35,10 +42,16 @@ public class Animations extends Renderer{
                 this.imageIndex += 1;
             }
             else{
-                this.imageIndex = 0;
+                if(oneTime){
+                    this.finished = true;
+                }
+                else{
+                    this.imageIndex = 0;
+                }
             }
         }
     }
+
 
     private void renderCurrentImage(Graphics g, Vector2D position){
         Image currentImage = images.get(imageIndex);
