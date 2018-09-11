@@ -1,5 +1,7 @@
 package Bases;
 
+import Enemies.Enemy;
+import Enemies.EnemyBullet;
 import Players.PlayerBullet;
 
 import java.awt.*;
@@ -66,6 +68,56 @@ public class GameObject {
 //        return r;
 //    }
 
+    public static Enemy rec1(int x, int y){
+        Enemy enemy = null;
+
+        for(GameObject go: gameObjects){
+            if(!go.isActive){
+                if(go instanceof  Enemy){
+                    enemy = (Enemy) go;
+                }
+            }
+        }
+
+        if(enemy == null){
+            enemy = new Enemy(x , y);
+            GameObject.add(enemy);
+        }
+        else{
+            enemy.isActive = true;
+            enemy.position.x = x;
+            enemy.position.y = y;
+        }
+
+        return enemy;
+    }
+
+
+    public static EnemyBullet rec2(int x, int y){
+        EnemyBullet eb = null;
+
+        for(GameObject go: gameObjects){
+            if(!go.isActive){
+                if(go instanceof  Enemy){
+                    eb = (EnemyBullet) go;
+                }
+            }
+        }
+
+        if(eb == null){
+            eb = new EnemyBullet(x , y);
+            GameObject.add(eb);
+        }
+        else{
+            eb.isActive = true;
+            eb.position.x = x;
+            eb.position.y = y;
+        }
+
+        return eb;
+    }
+
+
     public static PlayerBullet recycle(int x, int y){
         PlayerBullet pb = null;
 
@@ -116,21 +168,6 @@ public class GameObject {
         }
         return  result;
     }
-
-//
-//    public static Player playerCollision(BoxCollider boxCollider){
-//        Player result = null;
-//        for (GameObject go: gameObjects){
-//            if(go.boxCollider != null && go.isActive){
-//                if(go instanceof Player){
-//                    if(go.boxCollider.collideWith(boxCollider)){
-//                        result = (Player) go;
-//                    }
-//                }
-//            }
-//        }
-//        return  result;
-//    }
 
     public void run(){
         if(this.boxCollider != null){

@@ -1,8 +1,6 @@
 package Players;
 
-import Bases.BoxCollider;
-import Bases.GameObject;
-import Bases.ImageRenderer;
+import Bases.*;
 import Enemies.Enemy;
 
 public class Player extends GameObject {
@@ -11,7 +9,10 @@ public class Player extends GameObject {
 
     public Player(int x, int y){
         super(x, y);
-        renderer = new ImageRenderer("images/player/MB-70/player1.png");
+        renderer = new Animations(ImageUtil.load("images/player/MB-70/player1.png"),
+                ImageUtil.load("images/player/MB-70/player2.png"),
+                ImageUtil.load("images/player/MB-70/player3.png"),
+                ImageUtil.load("images/player/MB-70/player4.png"));
         playerMove = new PlayerMove();
         pLayerShoot = new PLayerShoot();
         this.boxCollider = new BoxCollider(x, y, 25, 80);

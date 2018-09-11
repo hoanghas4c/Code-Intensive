@@ -1,14 +1,15 @@
 package Players;
 
-import Bases.BoxCollider;
-import Bases.ImageRenderer;
-import Bases.GameObject;
+import Bases.*;
 import Enemies.Enemy;
 
 public class PlayerBullet extends GameObject{
     public PlayerBullet(int x, int y){
         super(x, y);
-        renderer = new ImageRenderer("images/bullet/player/mb69bullet1.png");
+        renderer = new Animations(ImageUtil.load("images/bullet/player/mb70bullet1.png"),
+                ImageUtil.load("images/bullet/player/mb70bullet2.png"),
+                ImageUtil.load("images/bullet/player/mb70bullet3.png"),
+                ImageUtil.load("images/bullet/player/mb70bullet4.png"));
         this.boxCollider = new BoxCollider(x, y , 10 , 20);
     }
 

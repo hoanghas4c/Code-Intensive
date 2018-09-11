@@ -15,7 +15,7 @@ public class BloodSpawn extends GameObject {
     public void run(){
         frameCounter.run();
         if (frameCounter.expired){
-            BloodCell bloodCell = new BloodCell(random.nextInt(600) , 0);
+            BloodCell bloodCell = new BloodCell(0 ,random.nextInt(800));
             GameObject.add(bloodCell);
             frameCounter.reset();
         }

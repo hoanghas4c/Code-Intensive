@@ -1,15 +1,15 @@
 package Enemies;
 
-import Bases.BoxCollider;
-import Bases.ImageRenderer;
-import Bases.GameObject;
+import Bases.*;
 import Players.Player;
 
 public class EnemyBullet extends GameObject{
 
     public EnemyBullet(int x, int y){
         super(x, y);
-        renderer = new ImageRenderer("images\\bullet\\enemy\\enemy2_bullet1.png");
+        renderer = new Animations(ImageUtil.load("images/bullet/enemy/enemy2_bullet1.png"),
+                ImageUtil.load("images/bullet/enemy/enemy2_bullet2.png"),
+                ImageUtil.load("images/bullet/enemy/enemy2_bullet3.png"));
         this.boxCollider = new BoxCollider(x, y, 20, 20);
     }
 
@@ -17,6 +17,13 @@ public class EnemyBullet extends GameObject{
         super.run();
         this.position.addUp(0, 5);
         hitPlayer();
+        deactivate();
+    }
+
+    private void deactivate(){
+        if(this.position.y > 800){
+            this.isActive = false;
+        }
     }
 
     private void hitPlayer(){

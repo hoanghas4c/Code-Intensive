@@ -10,12 +10,6 @@ public class Enemy extends GameObject {
     public Enemy(int x, int y){
         super(x, y);
 
-//        ArrayList<Image> images = new ArrayList<>();
-//        images.add(ImageUtil.load("images/enemy/bacteria/bacteria1.png"));
-//        images.add(ImageUtil.load("images/enemy/bacteria/bacteria2.png"));
-//        images.add(ImageUtil.load("images/enemy/bacteria/bacteria3.png"));
-//        images.add(ImageUtil.load("images/enemy/bacteria/bacteria4.png"));
-
         enemyShoot = new EnemyShoot();
         renderer = new Animations(
                 ImageUtil.load("images/enemy/bacteria/bacteria1.png"),
@@ -29,7 +23,9 @@ public class Enemy extends GameObject {
     public void run(){
         this.move();
         this.shoot();
+        deactivateIfNeeded();
     }
+
     public void shoot() {
         enemyShoot.run(this);
     }
@@ -38,6 +34,13 @@ public class Enemy extends GameObject {
         super.run();
        this.position.addUp(0, 3);
     }
+
+    private void deactivateIfNeeded(){
+        if (this.position.y > 800){
+            this.isActive = false;
+        }
+    }
+
 
     public void getHit(){
         this.destroy();

@@ -39,7 +39,7 @@ public class BoxCollider extends GameObject{
         return xOverlap && yOverlap;
     }
 
-    public void render(Graphics g){
-        g.drawRect((int) this.left(),(int) this.top(), this.width, this.height);
-    }
+//    public void render(Graphics g){
+//        g.drawRect((int) this.left(),(int) this.top(), this.width, this.height);
+//    }
 }
