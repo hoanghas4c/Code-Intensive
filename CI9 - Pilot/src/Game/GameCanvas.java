@@ -1,12 +1,8 @@
-package Game;
+package game;
 
-import Bases.ImageUtil;
-import Bases.GameObject;
-import Enemies.Enemy;
-import Enemies.EnemyBullet;
-import Enemies.EnemySpawn;
-import Players.Player;
-import Players.PlayerBullet;
+import bases.GameObject;
+import enemies.EnemySpawn;
+import players.Player;
 
 
 import javax.swing.*;
@@ -16,9 +12,6 @@ import java.awt.image.BufferedImage;
 public class GameCanvas extends JPanel {
 
     GameObject gameObject;
-
-    EnemySpawn enemySpawn;
-    EnemyBullet enemyBullet;
 
     Player player;
     BloodSpawn bloodSpawn;

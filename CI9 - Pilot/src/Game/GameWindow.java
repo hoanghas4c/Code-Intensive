@@ -1,6 +1,6 @@
-package Game;
+package game;
 
-import Inputs.InputManager;
+import inputs.InputManager;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -56,7 +56,6 @@ public class GameWindow extends JFrame
                 gameCanvas.run();
                 lastTimeRender = currentTime;
             }
-
         }
     }
 }

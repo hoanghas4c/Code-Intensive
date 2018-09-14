@@ -1,10 +1,7 @@
-package Bases;
-
-import Enemies.Enemy;
-import Enemies.EnemyBullet;
-import Players.PlayerBullet;
+package bases;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class GameObject {
@@ -32,7 +29,6 @@ public class GameObject {
 
         gameObjects.addAll(newGameObjects);
         newGameObjects.clear();
-        System.out.println(gameObjects.size());
     }
 
     public static void renderAll(Graphics g){
@@ -45,19 +41,23 @@ public class GameObject {
     }
 
 
-    public static <R extends GameObject> R recycle(int x, int y, Class<R> cls ){
-        R result = null;
+    public static <R extends GameObject> R recycle(int x, int y, Class<R> cls ) {
         R r = null;
         for(GameObject go: gameObjects){
             if(!go.isActive){
                 if(go.getClass().equals(cls)){
-                    r = (R) go;
+                    r =  (R) go;
                 }
             }
         }
 
         if(r == null){
-            r = (R) new GameObject(x, y);
+            try {
+                // class --> Constructer --> newInstance
+                r = cls.getConstructor(int.class, int.class).newInstance(x, y);
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
             GameObject.add(r);
         }
         else{
@@ -68,79 +68,9 @@ public class GameObject {
         return r;
     }
 
-//    public static Enemy rec1(int x, int y){
-//        Enemy enemy = null;
-//
-//        for(GameObject go: gameObjects){
-//            if(!go.isActive){
-//                if(go instanceof  Enemy){
-//                    enemy = (Enemy) go;
-//                }
-//            }
-//        }
-//
-//        if(enemy == null){
-//            enemy = new Enemy(x , y);
-//            GameObject.add(enemy);
-//        }
-//        else{
-//            enemy.isActive = true;
-//            enemy.position.x = x;
-//            enemy.position.y = y;
-//        }
-//
-//        return enemy;
-//    }
-//
-//
-//    public static EnemyBullet rec2(int x, int y){
-//        EnemyBullet eb = null;
-//
-//        for(GameObject go: gameObjects){
-//            if(!go.isActive){
-//                if(go instanceof  Enemy){
-//                    eb = (EnemyBullet) go;
-//                }
-//            }
-//        }
-//
-//        if(eb == null){
-//            eb = new EnemyBullet(x , y);
-//            GameObject.add(eb);
-//        }
-//        else{
-//            eb.isActive = true;
-//            eb.position.x = x;
-//            eb.position.y = y;
-//        }
-//
-//        return eb;
-//    }
-//
-//
-//    public static PlayerBullet recycle(int x, int y){
-//        PlayerBullet pb = null;
-//
-//        for(GameObject go: gameObjects){
-//            if(!go.isActive){
-//                if(go instanceof  PlayerBullet){
-//                    pb = (PlayerBullet) go;
-//                }
-//            }
-//        }
-//
-//        if(pb == null){
-//            pb = new PlayerBullet(x, y);
-//            GameObject.add(pb);
-//        }
-//        else{
-//            pb.isActive = true;
-//            pb.position.x = x;
-//            pb.position.y = y;
-//        }
-//
-//        return pb;
-//    }
+    public GameObject(){
+        this(0, 0);
+    }
 
     public GameObject(int x, int y){
         this.position = new Vector2D(x, y);

@@ -1,8 +1,8 @@
-package Enemies;
+package enemies;
 
-import Bases.Animations;
-import Bases.GameObject;
-import Bases.ImageUtil;
+import bases.Animations;
+import bases.GameObject;
+import bases.ImageUtil;
 
 public class EnemyExplosion extends GameObject {
 

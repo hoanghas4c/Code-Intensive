@@ -1,9 +1,9 @@
-package Players;
+package players;
 
-import Bases.FrameCounter;
-import Bases.GameObject;
-import Bases.Vector2D;
-import Inputs.InputManager;
+import bases.FrameCounter;
+import bases.GameObject;
+import bases.Vector2D;
+import inputs.InputManager;
 
 public class PLayerShoot {
     boolean shootLock = false;//shoot
@@ -12,7 +12,7 @@ public class PLayerShoot {
     void run(Player player){
         if(InputManager.instance.xPressed && !this.shootLock){
             Vector2D bulletPosition = player.position.subtract(0, 30);
-            PlayerBullet newBullet = GameObject.recycle((int)bulletPosition.x, (int)bulletPosition.y, PlayerBullet.class);
+            PlayerBullet newBullet = GameObject.recycle((int)bulletPosition.x, (int)bulletPosition.y, PlayerBullet.class );
             this.shootLock = true;
         }
 
