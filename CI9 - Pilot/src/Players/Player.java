@@ -6,12 +6,13 @@ import enemies.Enemy;
 public class Player extends GameObject {
     private PlayerMove playerMove;
     private PLayerShoot pLayerShoot;
+
     private PlayerAnimator playerAnimator;
 
     public Player(int x, int y){
         super(x, y);
-        this.playerAnimator = new PLayerAnimator();
-       this.renderer = this.playerAnimator();
+        this.playerAnimator = new PlayerAnimator();
+        this.renderer = this.playerAnimator;
         playerMove = new PlayerMove();
         pLayerShoot = new PLayerShoot();
         this.boxCollider = new BoxCollider(x, y, 25, 80);
@@ -27,7 +28,7 @@ public class Player extends GameObject {
     }
 
     private void animate() {
-        this.playerAnimator.selectAnimation(this);
+        this.playerAnimator.selectAnimation(this.playerMove.velocity);
     }
 
     void shoot() {
