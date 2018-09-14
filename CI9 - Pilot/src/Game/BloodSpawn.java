@@ -1,7 +1,7 @@
-package Game;
+package game;
 
-import Bases.FrameCounter;
-import Bases.GameObject;
+import bases.FrameCounter;
+import bases.GameObject;
 import java.util.Random;
 
 public class BloodSpawn extends GameObject {

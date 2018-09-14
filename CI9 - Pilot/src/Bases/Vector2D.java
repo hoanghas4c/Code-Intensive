@@ -1,4 +1,4 @@
-package Bases;
+package bases;
 
 public class Vector2D {
     public float x;

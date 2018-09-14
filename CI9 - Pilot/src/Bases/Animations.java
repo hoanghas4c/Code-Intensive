@@ -1,4 +1,4 @@
-package Bases;
+package bases;
 
 import java.awt.*;
 import java.util.ArrayList;

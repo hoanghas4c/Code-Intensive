@@ -1,7 +1,7 @@
-package Game;
+package game;
 
-import Bases.GameObject;
-import Bases.ImageRenderer;
+import bases.GameObject;
+import bases.ImageRenderer;
 
 
 public class BackGround extends GameObject {

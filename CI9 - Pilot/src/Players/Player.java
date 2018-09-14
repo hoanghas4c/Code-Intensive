@@ -1,18 +1,17 @@
-package Players;
+package players;
 
-import Bases.*;
-import Enemies.Enemy;
+import bases.*;
+import enemies.Enemy;
 
 public class Player extends GameObject {
-    PlayerMove playerMove;
-    PLayerShoot pLayerShoot;
+    private PlayerMove playerMove;
+    private PLayerShoot pLayerShoot;
+    private PlayerAnimator playerAnimator;
 
     public Player(int x, int y){
         super(x, y);
-        renderer = new Animations(ImageUtil.load("images/player/MB-70/player1.png"),
-                ImageUtil.load("images/player/MB-70/player2.png"),
-                ImageUtil.load("images/player/MB-70/player3.png"),
-                ImageUtil.load("images/player/MB-70/player4.png"));
+        this.playerAnimator = new PLayerAnimator();
+       this.renderer = this.playerAnimator();
         playerMove = new PlayerMove();
         pLayerShoot = new PLayerShoot();
         this.boxCollider = new BoxCollider(x, y, 25, 80);
@@ -22,7 +21,13 @@ public class Player extends GameObject {
         super.run();
         this.move();
         this.shoot();//shoot
+        this.animate();
+
         hitEnemies();
+    }
+
+    private void animate() {
+        this.playerAnimator.selectAnimation(this);
     }
 
     void shoot() {

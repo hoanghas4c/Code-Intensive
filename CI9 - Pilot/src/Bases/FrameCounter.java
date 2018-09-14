@@ -1,4 +1,4 @@
-package Bases;
+package bases;
 
 public class FrameCounter {
     int count ;

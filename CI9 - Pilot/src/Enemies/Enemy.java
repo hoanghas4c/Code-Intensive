@@ -1,9 +1,6 @@
-package Enemies;
+package enemies;
 
-import Bases.*;
-
-import java.awt.*;
-import java.util.ArrayList;
+import bases.*;
 
 public class Enemy extends GameObject {
     EnemyShoot enemyShoot;

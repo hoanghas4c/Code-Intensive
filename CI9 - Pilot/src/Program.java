@@ -1,4 +1,4 @@
-import Game.GameWindow;
+import game.GameWindow;
 
 import java.io.IOException;
 

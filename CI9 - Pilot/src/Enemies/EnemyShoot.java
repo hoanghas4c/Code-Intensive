@@ -1,8 +1,8 @@
-package Enemies;
+package enemies;
 
-import Bases.FrameCounter;
-import Bases.GameObject;
-import Bases.Vector2D;
+import bases.FrameCounter;
+import bases.GameObject;
+import bases.Vector2D;
 
 public class EnemyShoot {
     FrameCounter frameCounter = new FrameCounter(100);

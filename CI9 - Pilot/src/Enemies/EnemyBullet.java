@@ -1,7 +1,7 @@
-package Enemies;
+package enemies;
 
-import Bases.*;
-import Players.Player;
+import bases.*;
+import players.Player;
 
 public class EnemyBullet extends GameObject{
 

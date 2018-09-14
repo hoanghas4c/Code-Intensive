@@ -1,9 +1,8 @@
-package Game;
+package game;
 
-import Bases.Animations;
-import Bases.GameObject;
-import Bases.ImageRenderer;
-import Bases.ImageUtil;
+import bases.Animations;
+import bases.GameObject;
+import bases.ImageUtil;
 
 import java.util.ArrayList;
 
